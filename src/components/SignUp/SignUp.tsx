@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from 'axios';
 
-export default function SignupPage() {
+export default function SignUp() {
   const router = useRouter();
   const [user, setUser] = React.useState({
     email: "",
@@ -14,17 +14,13 @@ export default function SignupPage() {
   const [buttonDisabled, setButtonDisabled] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
 
-  const onSignup = async () => {
+  const onSignUp = async () => {
     try {
       setLoading(true);
-      console.log('user', user)
-      const response = await axios.post("/api/users/signup", user);
-      console.log("Signup success", response.data);
+      await axios.post("/api/users/signup", user);
       router.push("/login");
-
     } catch (error: any) {
-      console.log("Signup failed", error.message);
-
+      // error
     } finally {
       setLoading(false);
     }
@@ -75,12 +71,11 @@ export default function SignupPage() {
         placeholder="Password"
       />
       <button
-        onClick={onSignup}
+        onClick={onSignUp}
         className={`p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none hover:bg-slate-200 duration-200 focus:border-gray-600 ${buttonDisabled ? 'pointer-events-none' : ''}`}>Sign up</button>
       <div className="inline-flex justify-end">
         <Link href="/login" className="hover:underline">Login</Link>
       </div>
     </div>
   )
-
 }

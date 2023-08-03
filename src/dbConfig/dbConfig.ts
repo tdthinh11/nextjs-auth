@@ -1,10 +1,8 @@
 import mongoose from "mongoose";
 
-export async function connect(dnName='') {
-  const URL = `${process.env.MONGO_URL}/${dnName}`
-  console.log('URL', URL)
+export async function connect() {
   try {
-    mongoose.connect(URL!)
+    mongoose.connect(process.env.MONGO_URL!)
     const connection = mongoose.connection
     connection.on('connected', () => {
       console.log('MongoDB connected')

@@ -6,7 +6,7 @@ First, run the development server:
 
 ### Add .env file into project
 ```
-MONGO_URL=mongodb+srv://thinh:thinh@cluster0.8seuvmh.mongodb.net
+MONGO_URL=mongodb+srv://thinh:thinh@cluster0.8seuvmh.mongodb.net/next-auth
 DOMAIN=http://localhost:3000
 TOKEN_SECRET=tokenserect
 ```

@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import bcryptjs from "bcryptjs"
 
-connect('users')
+connect()
 
 export async function POST(request: NextRequest) {
   try {
