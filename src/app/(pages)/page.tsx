@@ -1,9 +1,13 @@
-import Image from 'next/image'
+import Feed from "@/components/Feed/Feed";
+import LeftSide from "@/components/LeftSide/LeftSide";
+import RightSide from "@/components/RightSide/RightSide";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1>Home Page</h1>
+    <main className="mx-auto mt-20 flex justify-between">
+      <LeftSide />
+      <Feed />
+      <RightSide />
     </main>
   )
 }

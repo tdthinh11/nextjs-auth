@@ -25,12 +25,12 @@ export default function CreateNewPost() {
   }
 
   return <div>
-    <div className="text-center bg-white border p-5 flex items-center shadow-small-shadow rounded-sm">
+    <div className="text-center bg-white border p-5 flex items-center shadow-small-shadow rounded-lg">
       <div className="grow">
         <Avatar />
       </div>
       <button
-        className="border w-full py-2 px-4 rounded-3xl text-left hover:cursor-pointer"
+        className="border w-full py-2 px-4 rounded-3xl text-left text-gray-400 hover:cursor-pointer"
         onClick={() => setIsModalVisible(true)}
       >What&apos;s on your mind?</button>
     </div>

@@ -5,19 +5,21 @@ import { PiShareFatThin } from "react-icons/pi"
 import { BsThreeDots } from "react-icons/bs"
 import Avatar from "../Avatar/Avatar"
 import MenuItem from "../MenuItem/MenuItem"
+import { IPost } from "../Feed/Feed"
 
 interface IPostItem {
   isVisible: boolean
+  post: IPost
   // closeMenuItem?: (param: boolean) => void
 }
 
-export default function PostItem({ isVisible }: IPostItem) {
-  return <div className="p-4 mt-5 border bg-white shadow-small-shadow rounded-sm">
+export default function PostItem({ isVisible, post }: IPostItem) {
+  return <div className="p-4 mt-4 border bg-white shadow-full-shadow rounded-lg">
     <div className="flex items-center">
       <Avatar />
       <div className="grow">
         <div className="text-sm font-semibold flex justify-between items-center relative">
-          <span>Name</span>
+          <span>{post.name}</span>
           <button className="hover:cursor-pointer">
             <BsThreeDots />
           </button>
@@ -26,8 +28,8 @@ export default function PostItem({ isVisible }: IPostItem) {
         <p className="text-xs font-medium text-gray-500">10m</p>
       </div>
     </div>
-    <div className="min-h-[100px] mt-5 mb-4">
-      Vietnamese gave up Chinese characters (chữ Hán) and Classical Chinese (Hán văn) because it was too impractical and because of the French colonial rule. The French abolished the Confucian court examination in 1920 which in turn caused Classical Chinese and Chinese characters to fall into disuse. Here are some pictures of a Confucian court examination in Vietnam.
+    <div className="mt-4 mb-4">
+      {post.content}
     </div>
     <div className="border-t">
       <div className="flex justify-between mt-2">

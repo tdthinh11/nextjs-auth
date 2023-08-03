@@ -18,10 +18,11 @@ module.exports = {
         'full-shadow': '0px 0px 2px 2px rgba(0,0,0,0.04)'
       },
       width: {
-        'post-page': '550px'
+        'post-page': '590px'
       },
       colors: {
-        'btn-primary': '#1A6ED8'
+        primary: "#1B74E4",
+        'btn-primary': '#1A6ED8',
       }
     },
   },

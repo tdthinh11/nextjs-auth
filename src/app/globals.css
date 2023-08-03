@@ -7,6 +7,7 @@
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
   --main-background-color: #F1F2F2;
+  --header-height: 56px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,6 +24,19 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  color: black;
   background-color: var(--main-background-color)
+}
+
+.header,
+.header-left,
+.header-center,
+.header-right {
+  height: var(--header-height);
+}
+
+@layer components {
+  .icon_wrapper {
+      @apply bg-gray-200 w-[40px] h-[40px] rounded-full grid place-items-center hover:bg-gray-300 hover:cursor-pointer duration-200
+  }
 }
