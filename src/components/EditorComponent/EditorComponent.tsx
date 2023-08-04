@@ -6,10 +6,13 @@ interface IEditTorComponent {
   onEditorChange: (a: string, editor: any) => void
 }
 export default function EditorComponent({ initialValue = '', height, onEditorChange }: IEditTorComponent) {
-  return <div>
+  return <div style={{minHeight: height}}>
     <Editor
       apiKey="zmxi5xdu0cotnmjguibvk8l46m87uro0slbs5i36u5ylwziz"
       initialValue={initialValue}
+      scriptLoading={{
+        async: true
+      }}
       init={{
         // selector: 'textarea#myTextArea',
         height: height,

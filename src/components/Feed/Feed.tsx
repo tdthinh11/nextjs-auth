@@ -1,3 +1,5 @@
+'use client'
+import { useState } from "react";
 import CreateNewPost from "../CreateNewPost/CreateNewPost";
 import PostItem from "../PostItem/PostItem";
 
@@ -38,12 +40,17 @@ const FeedList:IPost[] = [
 ]
 
 export default function Feed() {
+  const [itemEditing, setItemEditing] = useState<number | null>(0)
   return <div className="w-post-page">
     <div>
       <CreateNewPost />
     </div>
     {FeedList.map((post, index) => {
-      return <PostItem key={index} isVisible={false} post={post}/>
+      return <PostItem
+        key={index}
+        post={post}
+        itemEditing={itemEditing}
+        onChangeItemEditing={(param) => setItemEditing(param)}/>
     })}
   </div>
 }

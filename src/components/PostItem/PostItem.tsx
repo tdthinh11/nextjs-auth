@@ -8,12 +8,12 @@ import MenuItem from "../MenuItem/MenuItem"
 import { IPost } from "../Feed/Feed"
 
 interface IPostItem {
-  isVisible: boolean
   post: IPost
-  // closeMenuItem?: (param: boolean) => void
+  itemEditing: number | null
+  onChangeItemEditing: (param: number | null) => void
 }
 
-export default function PostItem({ isVisible, post }: IPostItem) {
+export default function PostItem({ post, itemEditing, onChangeItemEditing }: IPostItem) {
   return <div className="p-4 mt-4 border bg-white shadow-full-shadow rounded-lg">
     <div className="flex items-center">
       <Avatar />
@@ -23,7 +23,7 @@ export default function PostItem({ isVisible, post }: IPostItem) {
           <button className="hover:cursor-pointer">
             <BsThreeDots />
           </button>
-          {isVisible && <MenuItem />}
+          {itemEditing === post.id && <MenuItem onChangeItemEditing={onChangeItemEditing}/>}
         </div>
         <p className="text-xs font-medium text-gray-500">10m</p>
       </div>

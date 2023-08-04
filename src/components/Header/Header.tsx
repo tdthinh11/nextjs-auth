@@ -21,7 +21,7 @@ export default function Header() {
         </div>
       </div>
 
-      <div className="header-center fixed top-0 right-0 left-0 z-10 bg-white">
+      <div className="header-center fixed top-0 right-0 left-0 z-10 bg-white w-[507px] mx-auto">
         <div className="flex items-center h-full justify-center gap-[100px] text-[30px] text-gray-500">
           <button className="relative hover:cursor-pointer">
             <AiFillHome className="text-primary" />

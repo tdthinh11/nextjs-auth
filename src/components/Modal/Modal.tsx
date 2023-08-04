@@ -33,7 +33,7 @@ export default function Modal({
             maxWidth: size,
             width: size,
             height: height,
-            maxHeight: maxHeight
+            maxHeight: maxHeight,
           }}
         >
           <div className="flex justify-between items-center p-4">
