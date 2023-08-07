@@ -1,32 +1,25 @@
-// import React, { useRef, useEffect, MutableRefObject, MouseEventHandler, useCallback } from "react";
+import { useCallback, useEffect } from "react";
 
-// /**
-//  * Hook that alerts clicks outside of the passed ref
-//  */
-// export default function useOutsideAlerter(ref: MutableRefObject<null>, onClick: () => void) {
-//   /**
-//  * Alert if clicked on outside of element
-//  */
-//   // function handleClickOutside(event: MouseEvent) {
-//   //   console.log('event', event)
-//   //   if (ref.current) {
-//   //     console.log('event', event)
-//   //     onClick();
-//   //   }
-//   // }
+const useClickOutSide = (popupRef: React.RefObject<HTMLDivElement>, callBack: () => void) => {
+  const handleClickOutside = useCallback((event: MouseEvent) => {
+    if (popupRef.current && !popupRef.current.contains(event.target as Node)) {
+      callBack();
+    }
+  }, [callBack, popupRef])
 
-//   const handleClickOutside1 = 
+  useEffect(() => {
+    const handleDocumentClick = (event: MouseEvent) => {
+      handleClickOutside(event);
+    };
 
-//   useEffect(() => {
-//     // Bind the event listener
-//     document.addEventListener("mousedown", handleClickOutside);
-//     return () => {
-//       // Unbind the event listener on clean up
-//       document.removeEventListener("mousedown", handleClickOutside);
-//     };
-//   }, [handleClickOutside]);
+    // Attach the event listener on mount
+    document.addEventListener('click', handleDocumentClick);
 
-//   return {
-//     handleClickOutside
-//   }
-// }
+    // Remove the event listener on unmount
+    return () => {
+      document.removeEventListener('click', handleDocumentClick);
+    };
+  }, [handleClickOutside, callBack, popupRef]);
+};
+
+export default useClickOutSide;

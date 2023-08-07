@@ -3,8 +3,13 @@ import { useState } from "react";
 import Avatar from "../Avatar/Avatar";
 import EditorComponent from "../EditorComponent/EditorComponent";
 import Modal from "../Modal/Modal";
+import { IPost } from "../Feed/Feed";
+interface ICreateNewPost {
+  postLength?: number
+  onCreateNewPost: (postItem: IPost) => void
+}
 
-export default function CreateNewPost() {
+export default function CreateNewPost({postLength = 0, onCreateNewPost} : ICreateNewPost) {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
   const [postContent, setPostContent] = useState<string>('')
   const onEditorChange = (content: string, editor: any) => {
@@ -12,16 +17,15 @@ export default function CreateNewPost() {
   }
 
   const createNewPost = async () => {
-    setPostContent('')
-    try {
-      setTimeout(() => {
-        console.log(`Call API to create new post with content: ${postContent}`)
-        setIsModalVisible(false)
-      }, 2000)
-      
-    } catch (error) {
-      // error
+    const postItem:IPost = {
+      id: postLength,
+      name: `My post ${postLength}`,
+      content: postContent,
+      like: []
     }
+    onCreateNewPost(postItem)
+    setPostContent('')
+    setIsModalVisible(false)
   }
 
   return <div>

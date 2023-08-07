@@ -1,28 +1,18 @@
 'use client'
-import { useEffect, useRef } from "react";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import "./style.css"
 
 interface IMenuItem {
-  onChangeItemEditing: (param: number | null) => void
+  onRemovePost: () => void
+  onShowEditingPost: () => void
 }
 
-
-export default function MenuItem({onChangeItemEditing} : IMenuItem) {
-  const wrapperRef = useRef(null);
-  useEffect(() => {
-    const handleClickOutSide = (event: MouseEvent) => {
-      const elementTarget = event.currentTarget as HTMLElement
-      console.log('mouse event', elementTarget)
-    }
-    window.addEventListener('click', handleClickOutSide)
-
-    return () => {
-      window.removeEventListener('click', handleClickOutSide)
-    }
-  }, [])
-  return <div ref={wrapperRef} className="menu-post-item absolute right-3 top-5 w-40 shadow-full-shadow bg-white">
-    <button className="flex items-center gap-4 py-2 hover:bg-slate-100 p-2 hover:cursor-pointer w-full">
+export default function MenuItem({ onRemovePost, onShowEditingPost }: IMenuItem) {
+  return <div className="menu-post-item w-40 bg-white">
+    <button
+      className="flex items-center gap-4 hover:bg-slate-100 p-3 hover:cursor-pointer w-full"
+      onClick={onShowEditingPost}
+    >
       <div>
         <AiOutlineEdit />
       </div>
@@ -30,7 +20,10 @@ export default function MenuItem({onChangeItemEditing} : IMenuItem) {
         Edit
       </span>
     </button>
-    <button className="flex items-center gap-4 py-2 hover:bg-slate-100 p-2 hover:cursor-pointer w-full">
+    <button
+      className="flex items-center gap-4 hover:bg-slate-100 p-3 hover:cursor-pointer w-full"
+      onClick={onRemovePost}
+    >
       <div>
         <AiOutlineDelete />
       </div>
