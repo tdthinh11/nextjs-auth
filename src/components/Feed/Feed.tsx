@@ -2,11 +2,17 @@
 import { useState, useCallback } from "react";
 import CreateNewPost from "../CreateNewPost/CreateNewPost";
 import PostItem from "../PostItem/PostItem";
+
+export interface IComment {
+  userName: string
+  commentContent: string
+}
 export interface IPost {
   id: number
   name: string
   content: string
   like: number[]
+  commentInit: IComment[]
 }
 
 const FeedList:IPost[] = [
@@ -14,7 +20,13 @@ const FeedList:IPost[] = [
     id: 0,
     name: 'Christiano Ronaldo',
     content: 'Good performance against a strong team. Pre-season preparations continue!💪🏼Fantastic welcome from the fans here in Japan 🇯🇵🙌🏼',
-    like: [0, 1]
+    like: [0, 1],
+    commentInit: [
+      {
+        userName: 'User comment name',
+        commentContent: 'I’m looking forward to play these two exciting matches and to perfom in my best condition, I am preparing with SIXPAD'
+      }
+    ]
   },
   {
     id: 1,
@@ -27,19 +39,41 @@ const FeedList:IPost[] = [
     #SIXPAD 
     #アルナスル来日2023
     #AlNassrJapanTour2023`,
-    like: [1]
+    like: [1],
+    commentInit: [
+      {
+        userName: 'User comment name',
+        commentContent: 'I’m looking forward to play these two exciting matches and to perfom in my best condition, I am preparing with SIXPAD'
+      },
+      {
+        userName: 'User name 2',
+        commentContent: 'I’m looking forward to play these two exciting matches and to perfom in my best condition, I am preparing with SIXPAD'
+      }
+    ]
   },
   {
     id: 2,
     name: 'CR7',
     content: 'Get the opportunity to meet and train alongside me.',
-    like: []
+    like: [],
+    commentInit: [
+      {
+        userName: 'User comment name',
+        commentContent: 'I’m looking forward to play these two exciting matches and to perfom in my best condition, I am preparing with SIXPAD'
+      }
+    ]
   },
   {
     id: 3,
     name: 'Christiano Ronaldo',
     content: 'Introducing my new FEARLESS. A perfume made with the most fearless side of myself in mind.',
-    like: []
+    like: [],
+    commentInit: [
+      {
+        userName: 'User comment name',
+        commentContent: 'I’m looking forward to play these two exciting matches and to perfom in my best condition, I am preparing with SIXPAD'
+      }
+    ]
   },
 ]
 
@@ -94,6 +128,10 @@ export default function Feed() {
     }, 10)
   }, [])
 
+  const handleSubmitComment = useCallback((comment: IComment) => {
+    alert(comment.commentContent)
+  }, [])
+
   return <div className="w-post-page">
     <div>
       <CreateNewPost
@@ -110,6 +148,7 @@ export default function Feed() {
         onRemovePost={postId => handleRemovePostItem(postId)}
         onUpdatePost={handleEditPost}
         onLikePost={handleLikePost}
+        onSubmitComment={handleSubmitComment}
       />
     })}
   </div>

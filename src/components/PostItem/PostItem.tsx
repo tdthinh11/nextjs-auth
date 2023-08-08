@@ -8,7 +8,7 @@ import { PiShareFatThin } from "react-icons/pi"
 import { BsThreeDots } from "react-icons/bs"
 import Avatar from "../Avatar/Avatar"
 import MenuItem from "../MenuItem/MenuItem"
-import { IPost } from "../Feed/Feed"
+import { IComment, IPost } from "../Feed/Feed"
 import useClickOutSide from "@/hook/useClickOutSide"
 import Modal from '../Modal/Modal'
 import EditorComponent from '../EditorComponent/EditorComponent'
@@ -21,9 +21,10 @@ interface IPostItem {
   onRemovePost: (postId: number) => void
   onUpdatePost: (post: IPost) => void
   onLikePost: (userId: number, postId: number) => void
+  onSubmitComment: (param: IComment) => void
 }
 
-export default function PostItem({ post, menuItemId, onChangeMenuItemId, onRemovePost, onUpdatePost, onLikePost }: IPostItem) {
+export default function PostItem({ post, menuItemId, onChangeMenuItemId, onRemovePost, onUpdatePost, onLikePost, onSubmitComment }: IPostItem) {
   const popupRef = useRef<HTMLDivElement>(null);
   const [isEditingId, setIsEditingId] = useState<number | null>(null)
   const [postContent, setPostContent] = useState<string>(post.content)
@@ -132,7 +133,10 @@ export default function PostItem({ post, menuItemId, onChangeMenuItemId, onRemov
       </div>
     </div>
     <div className='mt-2'>
-      <CommentOnPost />
+      <CommentOnPost
+        commentInit={post.commentInit}
+        onSubmitComment={onSubmitComment}
+      />
     </div>
   </div>
 }
