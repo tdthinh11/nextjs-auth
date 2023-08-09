@@ -4,6 +4,9 @@ import Avatar from "../Avatar/Avatar";
 import EditorComponent from "../EditorComponent/EditorComponent";
 import Modal from "../Modal/Modal";
 import { IPost } from "../Feed/Feed";
+import axios from "axios";
+
+import Ava from '@/asset/img/cr7.png'
 interface ICreateNewPost {
   postLength?: number
   onCreateNewPost: (postItem: IPost) => void
@@ -19,9 +22,10 @@ export default function CreateNewPost({postLength = 0, onCreateNewPost} : ICreat
   const createNewPost = async () => {
     const postItem:IPost = {
       id: postLength,
-      name: `My post ${postLength}`,
+      name: `Post Number ${new Date().getMinutes() + new Date().getSeconds()}`,
       content: postContent,
-      like: []
+      like: [],
+      commentInit: []
     }
     onCreateNewPost(postItem)
     setPostContent('')
@@ -31,7 +35,9 @@ export default function CreateNewPost({postLength = 0, onCreateNewPost} : ICreat
   return <div>
     <div className="text-center bg-white border p-5 flex items-center shadow-small-shadow rounded-lg">
       <div className="grow">
-        <Avatar />
+        <Avatar
+          src={Ava}
+        />
       </div>
       <button
         className="border w-full py-2 px-4 rounded-3xl text-left text-gray-400 hover:cursor-pointer"

@@ -28,6 +28,7 @@ export default function PostItem({ post, menuItemId, onChangeMenuItemId, onRemov
   const popupRef = useRef<HTMLDivElement>(null);
   const [isEditingId, setIsEditingId] = useState<number | null>(null)
   const [postContent, setPostContent] = useState<string>(post.content)
+  const [isShowComment, setIsShowComment] = useState<boolean>(false)
 
   const handleRemovePost = useCallback(() => {
     onRemovePost(post.id)
@@ -57,7 +58,9 @@ export default function PostItem({ post, menuItemId, onChangeMenuItemId, onRemov
 
   return <div className="px-4 pt-4 pb-2 mt-4 border bg-white shadow-full-shadow rounded-lg">
     <div className="flex items-center">
-      <Avatar />
+      <Avatar
+        src={post.src}
+      />
       <div className="grow">
         <div className="text-sm font-semibold flex justify-between items-center relative">
           <span>{post.name}</span>
@@ -97,14 +100,22 @@ export default function PostItem({ post, menuItemId, onChangeMenuItemId, onRemov
           </button>
         </Modal>
       )}
-      <div className='mt-3'>
+      <div className='mt-3 flex justify-between'>
         {post.like.length > 0 ? (
           <div className='text-xs text-gray-600'>
             <span>{post.like.length}</span>
             <span>{post.like.length > 1 ? ' likes' : ' like'}</span>
           </div>
         ) : (
-          ''
+          <div></div>
+        )}
+        {post.commentInit.length > 0 ? (
+          <div className='text-xs text-gray-600'>
+            <span>{post.commentInit.length}</span>
+            <span>{post.commentInit.length > 1 ? ' comments' : ' comment'}</span>
+          </div>
+        ) : (
+          <div></div>
         )}
       </div>
     </div>
@@ -122,7 +133,10 @@ export default function PostItem({ post, menuItemId, onChangeMenuItemId, onRemov
           )}
           <span className={post.like.includes(0) ? 'text-primary' : ''}>Like</span>
         </button>
-        <button className='flex items-center gap-1 px-3 py-2 hover:bg-gray-100 rounded-md duration-150'>
+        <button
+          className='flex items-center gap-1 px-3 py-2 hover:bg-gray-100 rounded-md duration-150'
+          onClick={() => setIsShowComment(prev => !prev)}
+        >
           <BiComment />
           <span>Comment</span>
         </button>
@@ -134,8 +148,10 @@ export default function PostItem({ post, menuItemId, onChangeMenuItemId, onRemov
     </div>
     <div className='mt-2'>
       <CommentOnPost
+        rootId={post.id}
         commentInit={post.commentInit}
         onSubmitComment={onSubmitComment}
+        isShowComment={isShowComment}
       />
     </div>
   </div>

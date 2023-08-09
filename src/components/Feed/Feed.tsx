@@ -2,13 +2,18 @@
 import { useState, useCallback } from "react";
 import CreateNewPost from "../CreateNewPost/CreateNewPost";
 import PostItem from "../PostItem/PostItem";
+import { StaticImageData } from "next/image";
 
 export interface IComment {
+  rootId: number
+  id: number
+  src?: string | StaticImageData
   userName: string
   commentContent: string
 }
 export interface IPost {
   id: number
+  src?: string | StaticImageData
   name: string
   content: string
   like: number[]
@@ -18,11 +23,15 @@ export interface IPost {
 const FeedList:IPost[] = [
   {
     id: 0,
+    src: 'https://picsum.photos/id/100/200/300',
     name: 'Christiano Ronaldo',
     content: 'Good performance against a strong team. Pre-season preparations continue!💪🏼Fantastic welcome from the fans here in Japan 🇯🇵🙌🏼',
     like: [0, 1],
     commentInit: [
       {
+        rootId: 0,
+        id: 0,
+        src: 'https://picsum.photos/id/100/200/300',
         userName: 'User comment name',
         commentContent: 'I’m looking forward to play these two exciting matches and to perfom in my best condition, I am preparing with SIXPAD'
       }
@@ -30,6 +39,7 @@ const FeedList:IPost[] = [
   },
   {
     id: 1,
+    src: 'https://picsum.photos/id/101/200/300',
     name: 'Christiano Fake',
     content: `For the first time in seven years, I am in Japan, where I have visited many times for my partner MTG.
     July 25th – Al-Nassr vs PSG 
@@ -42,10 +52,16 @@ const FeedList:IPost[] = [
     like: [1],
     commentInit: [
       {
+        rootId: 1,
+        id: 0,
+        src: 'https://picsum.photos/id/10/200/300',
         userName: 'User comment name',
         commentContent: 'I’m looking forward to play these two exciting matches and to perfom in my best condition, I am preparing with SIXPAD'
       },
       {
+        rootId: 1,
+        id: 1,
+        src: 'https://picsum.photos/id/11/200/300',
         userName: 'User name 2',
         commentContent: 'I’m looking forward to play these two exciting matches and to perfom in my best condition, I am preparing with SIXPAD'
       }
@@ -53,11 +69,15 @@ const FeedList:IPost[] = [
   },
   {
     id: 2,
+    src: 'https://picsum.photos/id/102/200/300',
     name: 'CR7',
     content: 'Get the opportunity to meet and train alongside me.',
     like: [],
     commentInit: [
       {
+        rootId: 2,
+        id: 0,
+        src: 'https://picsum.photos/id/20/200/300',
         userName: 'User comment name',
         commentContent: 'I’m looking forward to play these two exciting matches and to perfom in my best condition, I am preparing with SIXPAD'
       }
@@ -65,11 +85,15 @@ const FeedList:IPost[] = [
   },
   {
     id: 3,
+    src: 'https://picsum.photos/id/103/200/300',
     name: 'Christiano Ronaldo',
     content: 'Introducing my new FEARLESS. A perfume made with the most fearless side of myself in mind.',
     like: [],
     commentInit: [
       {
+        rootId: 3,
+        id: 0,
+        src: 'https://picsum.photos/id/30/200/300',
         userName: 'User comment name',
         commentContent: 'I’m looking forward to play these two exciting matches and to perfom in my best condition, I am preparing with SIXPAD'
       }
@@ -88,7 +112,6 @@ export default function Feed() {
   }, [])
 
   const handleRemovePostItem = useCallback((postId: number) => {
-    console.log('Call API to update list post')
     // Call API to update list post
     setTimeout(() => {
       setMenuItemId(null)
@@ -97,7 +120,6 @@ export default function Feed() {
   }, [])
 
   const handleEditPost = useCallback((post: IPost) => {
-    console.log('Handle editing post', post)
     setTimeout(() => {
       setFeedList(prev => {
         const listPostUpdate = [...prev]
@@ -129,7 +151,16 @@ export default function Feed() {
   }, [])
 
   const handleSubmitComment = useCallback((comment: IComment) => {
-    alert(comment.commentContent)
+    setTimeout(() => {
+      setFeedList(prev => {
+        const listPostUpdate = [...prev]
+        const index = prev.findIndex(postItem => postItem.id === comment.rootId)
+        if (index !== -1) {
+          listPostUpdate[index].commentInit.push(comment)
+        }
+        return listPostUpdate
+      })
+    }, 500)
   }, [])
 
   return <div className="w-post-page">

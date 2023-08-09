@@ -8,7 +8,6 @@ connect()
 
 export async function POST(request: NextRequest) {
   try {
-    console.log('user', User)
     const reqBody = await request.json()
     const { email, password } = reqBody;
 

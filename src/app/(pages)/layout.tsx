@@ -4,6 +4,6 @@ interface IProtectedLayout {
 
 export default function ProtectedLayout({ children }: IProtectedLayout) {
   return <div>
-    <main>{ children }</main>
+    <main className="pb-7">{ children }</main>
   </div>
 }
