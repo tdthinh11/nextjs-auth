@@ -1,7 +1,6 @@
 'use client'
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import "./style.css"
-
 interface IMenuItem {
   onRemovePost: () => void
   onShowEditingPost: () => void

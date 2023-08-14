@@ -46,7 +46,7 @@ export default function CommentOnPost({ commentInit, rootId, isShowComment, onSu
     onSubmitComment(param)
   }
 
-  return <div>
+  return <div className='mt-2'>
     {isShowComment && <div>
       {commentInit.map(((itemComment, index) => {
         return <div key={index}>

@@ -40,3 +40,34 @@ body {
       @apply bg-gray-200 w-[40px] h-[40px] rounded-full grid place-items-center hover:bg-gray-300 hover:cursor-pointer duration-200
   }
 }
+
+/* Scroll bar */
+* {
+  /* --color-scrollable: #0085ff; */
+  --color-scrollable: #b8b9bb;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-scrollable) transparent;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar:vertical {
+  width: 10px;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-scrollable);
+  border-radius: 10px;
+  overflow: hidden;
+}

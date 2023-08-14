@@ -2,26 +2,29 @@ import { GrClose } from "react-icons/gr"
 
 interface IModal {
   isVisible: boolean
-  size?: string | number
-  height?: string | number
-  maxHeight?: string | number
+  size?: string
+  height?: string
+  maxHeight?: string
   modalZIndex?: number
-  children: React.ReactNode
+  body?: React.ReactNode
+  footer?: React.ReactNode
   title: string
   hideModal: () => void
 }
 
 export default function Modal({
   isVisible = false,
-  size = 400,
+  size = '400px',
   height,
-  maxHeight,
+  maxHeight = '40vh',
   modalZIndex = 100,
-  children,
+  body,
+  footer,
   title,
-  hideModal
+  hideModal,
+  ...props
 }: IModal) {
-  return <div className="fade">
+  return <div className="fade" {...props}>
     {isVisible && (
       <div
         className="modal-backdrop fixed top-0 bottom-0 left-0 right-0 bg-[rgba(0,0,0,.3)] flex justify-center items-center"
@@ -33,7 +36,7 @@ export default function Modal({
             maxWidth: size,
             width: size,
             height: height,
-            maxHeight: maxHeight,
+            // maxHeight: maxHeight,
           }}
         >
           <div className="flex justify-between items-center p-4">
@@ -47,7 +50,16 @@ export default function Modal({
           </div>
           <div className="border-b mb-4"></div>
           <div className="p-4">
-            {children}
+            <div className="body overflow-x-hidden overflow-y-auto"
+              style={{
+                maxHeight: maxHeight
+              }}
+            >
+              {body}
+            </div>
+            <div className="footer">
+              {footer}
+            </div>
           </div>
         </div>
       </div>

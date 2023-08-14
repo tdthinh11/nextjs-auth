@@ -6,7 +6,7 @@ interface IEditTorComponent {
   onEditorChange: (a: string, editor: any) => void
 }
 export default function EditorComponent({ initialValue = '', height, onEditorChange }: IEditTorComponent) {
-  return <div style={{minHeight: height}}>
+  return <div style={{ minHeight: height }}>
     <Editor
       apiKey="zmxi5xdu0cotnmjguibvk8l46m87uro0slbs5i36u5ylwziz"
       initialValue={initialValue}
@@ -22,8 +22,7 @@ export default function EditorComponent({ initialValue = '', height, onEditorCha
         //   'searchreplace visualblocks code fullscreen',
         //   'insertdatetime media table paste code help wordcount'
         // ],
-        toolbar:
-          'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+        toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
       }}
       // init={{
       //   plugins: 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
